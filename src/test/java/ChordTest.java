@@ -9,6 +9,9 @@ import java.lang.reflect.Field;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChordTest {
+    final private static int GENERATE_ITER = 10;
+    final private static String ROOT_FIELD_NAME = "root";
+    final private static String TYPE_FIELD_NAME = "type";
     final private static ChordRoot[] CHORD_ROOTS = new ChordRoot[] {
             ChordRoot.C, ChordRoot.Cs, ChordRoot.Db,
             ChordRoot.D, ChordRoot.Ds, ChordRoot.Eb,
@@ -52,11 +55,11 @@ class ChordTest {
     void checkFields() {
         boolean root = false, type = false;
         for (Field f : Chord.class.getFields()) {
-            if (f.getName().equals("root") && f.getType() == ChordRoot.class) {
+            if (f.getName().equals(ROOT_FIELD_NAME) && f.getType() == ChordRoot.class) {
                 root = true;
 
                 if (type) break;
-            } else if (f.getName().equals("type")) {
+            } else if (f.getName().equals(TYPE_FIELD_NAME)) {
                 type = true;
 
                 if (root) break;
@@ -98,7 +101,7 @@ class ChordTest {
         boolean different = false;
         Chord c = Chord.generate();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < GENERATE_ITER; i++) {
             if (!c.equals(Chord.generate())) {
                 different = true;
                 break;
