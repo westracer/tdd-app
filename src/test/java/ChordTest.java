@@ -79,4 +79,32 @@ class ChordTest {
             }
         }
     }
+
+    @Test
+    void equalsCheck() {
+        for (ChordType t : ChordType.values()) {
+            for (ChordRoot r : ChordRoot.values()) {
+
+                Chord c1 = new Chord(r, t);
+                Chord c2 = new Chord(r, t);
+
+                assertEquals(c1, c2, "Объекты не равны");
+            }
+        }
+    }
+
+    @Test
+    void randomChordGenerator() {
+        boolean different = false;
+        Chord c = Chord.generate();
+
+        for (int i = 0; i < 10; i++) {
+            if (!c.equals(Chord.generate())) {
+                different = true;
+                break;
+            }
+        }
+
+        assertTrue(different, "Генерируются одинаковые объекты Chord");
+    }
 }
