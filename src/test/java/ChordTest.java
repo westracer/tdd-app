@@ -28,19 +28,28 @@ class ChordTest {
     }
 
     @Test
-    void rootEnumCheck() {
+    void rootEnumNotNullCheck() {
         assertNotNull(ChordRoot.class, "Enum ChordRoot не существует");
+    }
+
+    @Test
+    void rootEnumCheck() {
         assertArrayEquals(ChordRoot.values(), CHORD_ROOTS, "Значения ChordRoot не совпадают");
     }
 
     @Test
-    void typeEnumCheck() {
+    void typeEnumNotNullCheck() {
         assertNotNull(ChordRoot.class, "Enum ChordType не существует");
         assertArrayEquals(ChordType.values(), CHORD_TYPES, "Значения ChordType не совпадают");
     }
 
     @Test
-    void checkFieldsAndConstructor() {
+    void typeEnumCheck() {
+        assertArrayEquals(ChordType.values(), CHORD_TYPES, "Значения ChordType не совпадают");
+    }
+
+    @Test
+    void checkFields() {
         boolean root = false, type = false;
         for (Field f : Chord.class.getFields()) {
             if (f.getName().equals("root") && f.getType() == ChordRoot.class) {
@@ -56,7 +65,10 @@ class ChordTest {
 
         assertTrue(root, "Поле root у класса Chord неверное");
         assertTrue(type, "Поле type у класса Chord неверное");
+    }
 
+    @Test
+    void checkConstructor() {
         for (ChordType t : ChordType.values()) {
             for (ChordRoot r : ChordRoot.values()) {
 
