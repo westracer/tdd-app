@@ -4,6 +4,8 @@ import model.Chord;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChordTest {
@@ -35,5 +37,34 @@ class ChordTest {
     void typeEnumCheck() {
         assertNotNull(ChordRoot.class, "Enum ChordType не существует");
         assertArrayEquals(ChordType.values(), CHORD_TYPES, "Значения ChordType не совпадают");
+    }
+
+    @Test
+    void checkFieldsAndConstructor() {
+        boolean root = false, type = false;
+        for (Field f : Chord.class.getFields()) {
+            if (f.getName().equals("root") && f.getType() == ChordRoot.class) {
+                root = true;
+
+                if (type) break;
+            } else if (f.getName().equals("type")) {
+                type = true;
+
+                if (root) break;
+            }
+        }
+
+        assertTrue(root, "Поле root у класса Chord неверное");
+        assertTrue(type, "Поле type у класса Chord неверное");
+
+        for (ChordType t : ChordType.values()) {
+            for (ChordRoot r : ChordRoot.values()) {
+
+                Chord c = new Chord(r, t);
+
+                assertEquals(c.root, r, "Создан объект класса Chord с неверным значением root");
+                assertEquals(c.type, t, "Создан объект класса Chord с неверным значением type");
+            }
+        }
     }
 }
