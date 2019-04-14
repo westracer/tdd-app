@@ -1,6 +1,4 @@
-import model.Chord;
-import model.ChordGroup;
-import model.ChordGroupType;
+import model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
@@ -9,6 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ChordGroupTest {
     final private static int GENERATE_ITER = 10;
+
+    @Test
+    void equalsCheck() {
+        Chord[] chords = new Chord[]{ Chord.generate(), Chord.generate() };
+        for (ChordGroupType t : ChordGroupType.values()) {
+            ChordGroup c1 = new ChordGroup(chords, t);
+            ChordGroup c2 = new ChordGroup(chords, t);
+
+            assertEquals(c1, c2, "Объекты не равны");
+        }
+    }
 
     @Test
     void generateOneGroup() {
