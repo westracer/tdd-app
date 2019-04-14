@@ -29,4 +29,39 @@ public class Chord {
             return super.equals(obj);
         }
     }
+
+    @Override
+    public String toString() {
+        String rootName, typeName;
+        switch (root) {
+            case As:
+            case Cs:
+            case Ds:
+            case Gs:
+            case Fs:
+                rootName = root.toString().toCharArray()[0] + "#";
+                break;
+            default:
+                rootName = root.toString();
+        }
+
+        switch (type) {
+            case five:
+                typeName = "5";
+                break;
+            case seven:
+                typeName = "7";
+                break;
+            case major:
+                typeName = "";
+                break;
+            case minor:
+                typeName = "m";
+                break;
+            default:
+                typeName = "";
+        }
+
+        return rootName + typeName;
+    }
 }

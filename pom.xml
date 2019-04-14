@@ -14,6 +14,11 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>se.emirbuc.randomsentence</groupId>
+            <artifactId>random-sentence-generator</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
 
