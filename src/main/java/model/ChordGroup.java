@@ -1,15 +1,34 @@
 package model;
 
-public class ChordGroup {
-    public Chord[] chords;
-    public String sentence;
+import java.util.Random;
 
-    public ChordGroup(Chord[] chords, String s) {
+public class ChordGroup {
+    public static final int MIN_MAIN_CHORDS = 1;
+    public static final int MAX_MAIN_CHORDS = 4;
+    public static final int MIN_EXTRA_CHORDS = 0;
+    public static final int MAX_EXTRA_CHORDS = 3;
+
+    public Chord[] chords;
+    public ChordGroupType type;
+
+    public ChordGroup(Chord[] chords, ChordGroupType t) {
         this.chords = chords;
-        this.sentence = s;
+        this.type = t;
     }
 
-    public static ChordGroup generate() {
-        return null;
+    public static ChordGroup generate(ChordGroupType t) {
+        Random r = new Random();
+
+        int min = t == ChordGroupType.MAIN ? MIN_MAIN_CHORDS : MIN_EXTRA_CHORDS;
+        int max = t == ChordGroupType.MAIN ? MAX_MAIN_CHORDS : MAX_EXTRA_CHORDS;
+
+        int size = r.nextInt(max - min) + min;
+        Chord[] chords = new Chord[size];
+
+        for (int i = 0; i < size; i++) {
+            chords[i] = Chord.generate();
+        }
+
+        return new ChordGroup(chords, t);
     }
 }
