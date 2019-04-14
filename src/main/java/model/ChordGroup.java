@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class ChordGroup {
@@ -30,5 +31,16 @@ public class ChordGroup {
         }
 
         return new ChordGroup(chords, t);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() == ChordGroup.class) {
+            ChordGroup g2 = (ChordGroup) obj;
+
+            return Arrays.equals(chords, g2.chords) && type == g2.type;
+        } else {
+            return super.equals(obj);
+        }
     }
 }
