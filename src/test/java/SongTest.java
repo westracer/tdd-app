@@ -1,6 +1,10 @@
 import model.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.regex.Pattern;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SongTest {
@@ -31,6 +35,28 @@ class SongTest {
         assertTrue(
                 song.verses.length >= Song.MIN_VERSES && song.verses.length <= Song.MAX_VERSES,
                 "Сгенерировано неверное число куплетов"
+        );
+    }
+
+    @Test
+    void printSongPart() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+
+        Song song = Song.generate();
+        SongPart verse = song.verses[0];
+
+        verse.print();
+
+        System.out.flush();
+        System.setOut(old);
+
+        assertEquals(
+                verse.sentences.length * 2 + 2, // 2 = название куплета + первая строка
+                baos.toString().split("\n").length,
+                "Выведено неверное количество строк"
         );
     }
 }
