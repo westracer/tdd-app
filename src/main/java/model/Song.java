@@ -31,4 +31,12 @@ public class Song {
 
         return song;
     }
+
+    public void print() {
+        for (int i = 0; i < verses.length; i++) {
+            if (i != 0 && hasChorus) chorus.print();
+
+            verses[i].print();
+        }
+    }
 }
