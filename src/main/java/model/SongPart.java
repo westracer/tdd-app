@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class SongPart {
     public static final int MIN_SENTENCES = 6;
-    public static final int MAX_SENTENCES = 15;
-    static final double SKIP_CHORD_SENTENCE = .15;
+    private static final int MAX_SENTENCES = 15;
+    private static final double SKIP_CHORD_SENTENCE = .15;
 
     public String name;
     public ChordGroup[] chordGroups;

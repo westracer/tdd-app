@@ -6,13 +6,13 @@ public class Song {
     public static final int MIN_VERSES = 1;
     public static final int MAX_VERSES = 3;
 
-    public ChordGroup[] mainChords;     // основные аккорды
-    public ChordGroup[] extraChords;    // доп. аккорды
+    private ChordGroup[] mainChords;     // основные аккорды
+    private ChordGroup[] extraChords;    // доп. аккорды
     public SongPart[] verses;           // куплеты
-    public SongPart chorus;             // припев
+    private SongPart chorus;             // припев
     public boolean hasChorus;           // есть ли припев
 
-    public Song() {}
+    private Song() {}
 
     public static Song generate() {
         Random r = new Random();

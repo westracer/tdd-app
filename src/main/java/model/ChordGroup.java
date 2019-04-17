@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ChordGroup {
-    public static final int MIN_MAIN_CHORDS = 1;
-    public static final int MAX_MAIN_CHORDS = 4;
-    public static final int MIN_EXTRA_CHORDS = 0;
-    public static final int MAX_EXTRA_CHORDS = 3;
+    private static final int MIN_MAIN_CHORDS = 1;
+    private static final int MAX_MAIN_CHORDS = 4;
+    private static final int MIN_EXTRA_CHORDS = 0;
+    private static final int MAX_EXTRA_CHORDS = 3;
 
     public Chord[] chords;
-    public double[] pos;
+    private double[] pos;
     public ChordGroupType type;
 
-    public ChordGroup(Chord[] chords, ChordGroupType t, double[] p) {
+    private ChordGroup(Chord[] chords, ChordGroupType t, double[] p) {
         this.chords = chords;
         this.type = t;
         this.pos = p;
