@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,8 +77,13 @@ class SongTest {
         int expected = song.hasChorus ? song.verses.length - 1 : 0;
         expected += song.verses.length;
 
-        Pattern p = Pattern.compile("[.*]:");
-        int actual = p.split(baos.toString()).length;
+        Pattern p = Pattern.compile("\\[.*]:");
+        Matcher m = p.matcher(baos.toString());
+        int actual = 0;
+
+        while (m.find()) {
+            actual++;
+        }
 
         assertEquals(expected, actual,"Выведено неверное количество частей песен");
     }
