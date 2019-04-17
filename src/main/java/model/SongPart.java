@@ -1,5 +1,9 @@
 package model;
 
+import se.emirbuc.randomsentence.RandomSentences;
+
+import java.util.Random;
+
 public class SongPart {
     public static final int MIN_SENTENCES = 6;
     public static final int MAX_SENTENCES = 15;
@@ -23,6 +27,30 @@ public class SongPart {
 
         for (int i = 0; i < sentences.length; i++) {
             sentences[i] = RandomSentences.generateRandomSentence(l);
+        }
+    }
+
+    public void print() {
+        Random r = new Random();
+
+        System.out.println("\n[" + name + "]:");
+
+        int gIndex = 0;
+        for (String str : sentences) {
+            boolean skipChordGroup = r.nextDouble() < SKIP_CHORD_SENTENCE;
+            if (skipChordGroup)
+                System.out.println();
+            else
+                chordGroups[gIndex].print(str);
+
+            System.out.println(str);
+
+            if (!skipChordGroup)
+                gIndex++;
+
+            if (gIndex >= chordGroups.length) {
+                gIndex = 0;
+            }
         }
     }
 }
