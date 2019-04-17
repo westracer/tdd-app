@@ -59,4 +59,26 @@ class SongTest {
                 "Выведено неверное количество строк"
         );
     }
+
+    @Test
+    void printSong() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+
+        Song song = Song.generate();
+        song.print();
+
+        System.out.flush();
+        System.setOut(old);
+
+        int expected = song.hasChorus ? song.verses.length - 1 : 0;
+        expected += song.verses.length;
+
+        Pattern p = Pattern.compile("[.*]:");
+        int actual = p.split(baos.toString()).length;
+
+        assertEquals(expected, actual,"Выведено неверное количество частей песен");
+    }
 }
