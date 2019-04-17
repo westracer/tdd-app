@@ -81,4 +81,20 @@ class SongTest {
 
         assertEquals(expected, actual,"Выведено неверное количество частей песен");
     }
+
+    @Test
+    void mainPrint() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+
+        Main.main(new String[] {});
+        System.out.flush();
+        System.setOut(old);
+
+        int actual = baos.toString().split("\n").length;
+
+        assertTrue(actual >= SongPart.MIN_SENTENCES + 1,"Выведено неверное количество частей песен");
+    }
 }
