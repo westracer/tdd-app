@@ -23,4 +23,14 @@ class SongTest {
             assertSame(pNew.name, TEST_PART_NAME, "Название части песни неверное");
         }
     }
+
+    @Test
+    void generateSong() {
+        Song song = Song.generate();
+
+        assertTrue(
+                song.verses.length >= Song.MIN_VERSES && song.verses.length <= Song.MAX_VERSES,
+                "Сгенерировано неверное число куплетов"
+        );
+    }
 }
