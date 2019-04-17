@@ -1,19 +1,34 @@
 package model;
 
-public class Song {
-    public static final int MIN_PARTS = 2;
-    public static final int MAX_PARTS = 3;
+import java.util.Random;
 
-    public Chord[] mainChords;          // основные аккорды
-    public Chord[] extraChords;         // доп. аккорды
-    public int chordsPerGroup;          // аккордов в группе
+public class Song {
+    public static final int MIN_VERSES = 1;
+    public static final int MAX_VERSES = 3;
+
+    public ChordGroup[] mainChords;     // основные аккорды
+    public ChordGroup[] extraChords;    // доп. аккорды
     public SongPart[] verses;           // куплеты
-    public boolean groupSizeChanges;    // меняется ли длина группы
     public SongPart chorus;             // припев
+    public boolean hasChorus;           // есть ли припев
 
     public Song() {}
 
     public static Song generate() {
-        return null;
+        Random r = new Random();
+        Song song = new Song();
+
+        song.mainChords = new ChordGroup[]{ ChordGroup.generate(ChordGroupType.MAIN), ChordGroup.generate(ChordGroupType.MAIN) };
+        song.extraChords = new ChordGroup[]{ ChordGroup.generate(ChordGroupType.EXTRA), ChordGroup.generate(ChordGroupType.EXTRA) };
+
+        song.chorus = new SongPart("Chorus", song.extraChords);
+        song.hasChorus = song.chorus.chordGroups[0].chords.length > 0 || song.chorus.chordGroups[1].chords.length > 0;
+
+        song.verses = new SongPart[r.nextInt(MAX_VERSES - MIN_VERSES) + MIN_VERSES];
+        for (int i = 0; i < song.verses.length; i++) {
+            song.verses[i] = new SongPart("Verse " + (i + 1), song.mainChords);
+        }
+
+        return song;
     }
 }
